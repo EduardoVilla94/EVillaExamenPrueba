@@ -1,0 +1,121 @@
+﻿@model ML.Persona
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div class="container">
+    <div class="row">
+        @using (Html.BeginForm("From", "RazorPersona", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.HiddenFor(model => model.IdPersona)
+
+            <div class="col-lg-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Nombre, "Nombre", new { @class = "control-label", @placeholder = "Nombre" })
+                    @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", id = "Nombre" })
+                    @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ApellidoPaterno, "Apellido Paterno", new { @class = "control-label", @placeholder = "Apellido Paterno" })
+                    @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control", id = "ApellidoPaterno" })
+                    @Html.ValidationMessageFor(model => model.ApellidoPaterno, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ApellidoMaterno, "Apellido Materno", new { @class = "control-label", @placeholder = "Apellido Materno" })
+                    @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control", id = "ApellidoMaterno" })
+                    @Html.ValidationMessageFor(model => model.ApellidoMaterno, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Direccion, "Dirección", new { @class = "control-label", @placeholder = "Dirección" })
+                    @Html.TextBoxFor(model => model.Direccion, new { @class = "form-control", id = "Direccion" })
+                    @Html.ValidationMessageFor(model => model.Direccion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Sexo, "Sexo", new { @class = "control-label", @placeholder = "Sexo M-F" })
+                    @Html.TextBoxFor(model => model.Sexo, new { @class = "form-control", id = "Sexo" })
+                    @Html.ValidationMessageFor(model => model.Sexo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Telefono, "Teléfono", new { @class = "control-label", @placeholder = "Teléfono" })
+                    @Html.TextBoxFor(model => model.Telefono, new { @class = "form-control", id = "Telefono", maxlength = 10 })
+                    @Html.ValidationMessageFor(model => model.Telefono, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-secondary">Guardar</button>
+        }
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('form').submit(function (e) {
+            e.preventDefault();
+
+            var nombre = $('#Nombre').val().trim();
+            var apellidoPaterno = $('#ApellidoPaterno').val().trim();
+            var apellidoMaterno = $('#ApellidoMaterno').val().trim();
+            var direccion = $('#Direccion').val().trim();
+            var sexo = $('#Sexo').val().trim();
+            var telefono = $('#Telefono').val().trim();
+
+            var isValid = true;
+            var errorMessage = '';
+
+            if (nombre === '') {
+                errorMessage += 'Por favor, ingresa el Nombre.\n';
+                isValid = false;
+            }
+            if (apellidoPaterno === '') {
+                errorMessage += 'Por favor, ingresa el Apellido Paterno.\n';
+                isValid = false;
+            }
+            if (apellidoMaterno === '') {
+                errorMessage += 'Por favor, ingresa el Apellido Materno.\n';
+                isValid = false;
+            }
+            if (direccion === '') {
+                errorMessage += 'Por favor, ingresa la Dirección.\n';
+                isValid = false;
+            }
+            if (sexo === '') {
+                errorMessage += 'Por favor, ingresa el Sexo.\n';
+                isValid = false;
+            }
+            if (telefono === '') {
+                errorMessage += 'Por favor, ingresa el Teléfono.\n';
+                isValid = false;
+            } else if (!/^\d{10}$/.test(telefono)) {
+                errorMessage += 'El Teléfono debe contener exactamente 10 dígitos.\n';
+                isValid = false;
+            }
+
+            if (!isValid) {
+                alert(errorMessage);
+                return;
+            }
+
+            this.submit();
+        });
+    });
+</script>
+
+

@@ -1,0 +1,51 @@
+﻿@model ML.Persona
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<html>
+
+<body>
+    <a href="@Url.Action("From","RazorPersona", new {IdPersona = 0})" , class="btn btn-primary">Agregar</a>
+    @if (Model.PersonaList.Count() > 0)
+    {
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <table class="table table-hover table-bordered table-responsive table-striped" id="TablaUsuario">
+                        <thead>
+                            <tr>
+                                <th>IdPersona</th>
+                                <th>Nombre</th>
+                                <th>Direccion</th>
+                                <th>Sexo</th>
+                                <th>Telefono</th>
+                                <th>Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.PersonaList)
+                            {
+                                <tr>
+                                    <td>@item.IdPersona</td>
+                                    <td>@item.Nombre @item.ApellidoPaterno @item.ApellidoMaterno</td>
+                                    <td>@item.Direccion</td>
+                                    <td>@item.Sexo</td>
+                                    <td>@item.Telefono</td>
+                                    <td>
+                                        <a href="@Url.Action("From","RazorPersona", new {idPersona = item.IdPersona})" , class="btn btn-info">Editar</a>
+                                        <a href="@Url.Action("Delete","RazorPersona", new {idPersona = item.IdPersona})" , class="btn btn-danger">Delete</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    }
+
+</body>
+</html>
